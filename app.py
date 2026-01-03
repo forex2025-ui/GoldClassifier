@@ -1,3 +1,4 @@
+from src.hourly_signal import get_hourly_signal
 from fastapi import FastAPI, Request
 from fastapi.responses import HTMLResponse
 from fastapi.templating import Jinja2Templates
@@ -44,3 +45,22 @@ def get_signal(request: Request, threshold: float = 0.55):
             "threshold": threshold
         }
     )
+    
+    
+@app.get("/signal/hourly", response_class=HTMLResponse)
+def hourly_signal(request: Request, threshold: float = 0.55):
+
+    result = get_hourly_signal(model, threshold)
+
+    return templates.TemplateResponse(
+        "index.html",
+        {
+            "request": request,
+            "signal": result["signal"],
+            "probability": result["probability_up"],
+            "threshold": threshold,
+            "timeframe": "Hourly",
+            "last_time": result["last_completed_hour"]
+        }
+    )
+

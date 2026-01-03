@@ -3,6 +3,8 @@
 ## Overview
 This project implements a complete machine-learning-based trading system to predict the next-period direction of gold prices.
 
+“The model outputs a probability of upward movement. The threshold defines the minimum confidence required to convert that probability into a BUY signal. It acts as a risk filter rather than changing the model itself.”
+
 The system covers the full lifecycle:
 - Data ingestion
 - Feature engineering

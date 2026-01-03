@@ -1,4 +1,4 @@
-DATA_PATH = "data/gold.csv"
+DATA_PATH = "data/gold_hourly.csv"
 
 FEATURE_COLUMNS = [
     "return_1",

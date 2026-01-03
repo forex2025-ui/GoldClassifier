@@ -4,16 +4,15 @@ import os
 
 os.makedirs("data", exist_ok=True)
 
-# Download gold futures data
-df = yf.download("GC=F", start="2015-01-01", auto_adjust=False)
+df = yf.download(
+    "GC=F",
+    interval="1h",
+    period="2y"   # Yahoo limit for hourly data
+)
 
-# Ensure proper structure
-df = df.reset_index()
+df.reset_index(inplace=True)
+df = df[["Datetime", "Open", "High", "Low", "Close", "Volume"]]
 
-# Keep only required columns
-df = df[["Date", "Open", "High", "Low", "Close", "Volume"]]
+df.to_csv("data/gold_hourly.csv", index=False)
 
-# Save clean CSV
-df.to_csv("data/gold.csv", index=False)
-
-print("gold.csv created cleanly")
+print("Hourly gold data saved")

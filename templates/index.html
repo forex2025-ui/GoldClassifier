@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Gold ML Signal</title>
+    <style>
+        body {
+            background-color: #0f172a;
+            color: #e5e7eb;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .card {
+            background-color: #020617;
+            padding: 30px;
+            border-radius: 12px;
+            width: 360px;
+            text-align: center;
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.2);
+        }
+
+        h1 {
+            color: gold;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: gold;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        .buy {
+            color: #22c55e;
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        .no-trade {
+            color: #ef4444;
+            font-size: 22px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+<div class="card">
+    <h1>Gold Price Signal</h1>
+
+    <form action="/signal" method="get">
+        <label>Threshold:</label><br><br>
+        <input type="number" step="0.01" name="threshold" value="0.55">
+        <br><br>
+        <button type="submit">Get Signal</button>
+    </form>
+
+    {% if signal %}
+        <p class="{% if signal == 'BUY' %}buy{% else %}no-trade{% endif %}">
+            {{ signal }}
+        </p>
+        <p>Probability UP: {{ probability }}</p>
+        <p>Threshold: {{ threshold }}</p>
+    {% endif %}
+</div>
+</body>
+</html>
